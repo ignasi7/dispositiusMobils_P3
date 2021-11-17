@@ -9,13 +9,13 @@ import {
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-var randomArray = [0, 2];
+var randomArray = [];
 var index = 0;
 var indexPlayer = 0;
 var timeToShowSelectedButton = false;
 
 export default function GameScreen({ route, navigation }) {
-  const { length } = route.params;
+  const { length, name } = route.params;
   const [gameFinished, setGameFinished] = useState(false);
   const [infoLabel, setInfoLabel] = useState("");
   const [winOrLoseLabel, setWinOrLoseLabel] = useState("");
@@ -27,6 +27,17 @@ export default function GameScreen({ route, navigation }) {
 
   useEffect(() => {
     console.log("He rebut el param length amb valor: " + length);
+    console.log("He rebut el nom: " + name);
+    
+    /* Crear sequencia aleatoria amb llargada que t'entri (del 0 al 1)*/
+    for(var i = 0; i < length; i++)
+    {
+      var max = 3;
+      var min = 0;
+      var randomButton = Math.floor(Math.random() * (max - min + 1)) + min;
+      randomArray.push(randomButton);
+      console.log(randomArray);
+    }
     initGame();
 
     const interval = setInterval(() => {
